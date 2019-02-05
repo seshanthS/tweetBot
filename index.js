@@ -141,7 +141,7 @@ function writeToBlockchain(tweetId, tweetMsg, tweeter){
 		web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
 		.on('transactionHash', (txHash)=>{
 			console.log('TransactionHash: ' + txHash + "\n id: " + idOnChain);
-			var msg = "@" + tweeter + " Here is your TransactionHash: "+ txHash +  "https://ropsten.etherscan.io/tx/" + txHash +" Wait For Confirmation..."
+			var msg = "@" + tweeter + " Here is your TransactionHash: "+ txHash +  " https://ropsten.etherscan.io/tx/" + txHash +" Wait For Confirmation..."
 			replyToTweet(tweetId, msg, tweeter)
 		})
 		.on('receipt',(receipt)=>{
