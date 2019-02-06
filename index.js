@@ -89,7 +89,6 @@ function replyToTweet(tweetId, msg, screenName){
 		 console.log(err);
 	});
 }
-console.log("calling writeToBlockchain()")
 
 //Function Not ready yet
 function readFromBlockchain(id){
@@ -140,14 +139,14 @@ function writeToBlockchain(tweetId, tweetMsg, tweeter){
 
 		web3.eth.sendSignedTransaction('0x' + serializedTx.toString('hex'))
 		.on('transactionHash', (txHash)=>{
-			console.log('TransactionHash: ' + txHash + "\n id: " + idOnChain);
+			console.log('TransactionHash: ' + txHash );
 			var msg = "@" + tweeter + " Here is your TransactionHash: "+ txHash +  " https://ropsten.etherscan.io/tx/" + txHash +" Wait For Confirmation..."
 			replyToTweet(tweetId, msg, tweeter)
 		})
 		.on('receipt',(receipt)=>{
 			console.log("Transaction Mined: " + receipt.transactionHash)
-			var msg = '@' + tweeter + ' Transaction Completed... Transaction Hash:  '+receipt.transactionHash + "https://ropsten.etherscan.io/tx/" + receipt.transactionHash
-		+ '\n If you are beginner and geeky, Try decoding the values in "EventLogs" tab. Note down the "id" , if you want to check the message in future...'
+			var msg = '@' + tweeter + " Transaction Mined ...\n https://ropsten.etherscan.io/tx/" + receipt.transactionHash
+		+ '\n If you are beginner and geeky, Try decoding the values in "EventLogs" tab. Note down the "id",For checking your msg in future..'
 		
 			replyToTweet(tweetId, msg, tweeter )
 			
